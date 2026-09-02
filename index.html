@@ -1,0 +1,2724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Test website for an AI Digital Twin / AI Business Assistant." />
+  <title>Digital Twin AI Assistant | Test Website</title>
+
+  <style>
+    :root {
+      --orange: #ff6a00;
+      --orange-light: #ff8b3d;
+      --orange-dark: #2a1000;
+      --black: #050505;
+      --surface: #090909;
+      --card: #0e0e0e;
+      --card-2: #121212;
+      --border: #252525;
+      --muted: #949494;
+      --muted-2: #b5b5b5;
+      --white: #ffffff;
+      --green: #57dc8d;
+      --blue: #73a8ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(90%, 1240px);
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 105px 0;
+    }
+
+    .orange {
+      color: var(--orange);
+    }
+
+    .section-tag {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      max-width: 820px;
+      font-size: clamp(34px, 4vw, 46px);
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .section-description {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 48px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid #3b1a08;
+      background: #211004;
+      color: var(--orange-light);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 22px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: 750;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #070707;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(255, 106, 0, 0.24);
+    }
+
+    .btn-secondary {
+      border: 1px solid #353535;
+      color: #dddddd;
+      background: #0b0b0b;
+    }
+
+    .btn-secondary:hover {
+      border-color: #5a5a5a;
+      transform: translateY(-2px);
+    }
+
+    /* ===============================
+       TEST BAR
+    =============================== */
+
+    .test-bar {
+      padding: 8px 20px;
+      text-align: center;
+      color: #070707;
+      background: var(--orange);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+    }
+
+    /* ===============================
+       NAVIGATION
+    =============================== */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5, 5, 5, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid #1c1c1c;
+    }
+
+    .nav-inner {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .test-pill {
+      display: inline-flex;
+      padding: 3px 7px;
+      margin-left: 7px;
+      border-radius: 5px;
+      background: #2a1102;
+      color: var(--orange);
+      font-size: 9px;
+      vertical-align: middle;
+      border: 1px solid #45200a;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: #a7a7a7;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-cta {
+      padding: 9px 16px;
+      border: 1px solid var(--orange);
+      border-radius: 8px;
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: var(--orange);
+      color: #070707;
+    }
+
+    /* ===============================
+       HERO
+    =============================== */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 96px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      right: -200px;
+      top: -180px;
+      border-radius: 50%;
+      background: rgba(255, 106, 0, 0.09);
+      filter: blur(130px);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      font-size: clamp(46px, 6vw, 68px);
+      line-height: 1.02;
+      margin-bottom: 24px;
+      letter-spacing: -1.8px;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+      color: #b5b5b5;
+      font-size: 18px;
+      margin-bottom: 31px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-bottom: 34px;
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 24px;
+      color: #9f9f9f;
+      font-size: 13px;
+    }
+
+    .hero-points span::before {
+      content: "●";
+      color: var(--orange);
+      margin-right: 7px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-width: 0;
+    }
+
+    /* ===============================
+       ANIMATED PHONE MOCKUP (replaces static hero photo)
+    =============================== */
+
+    .phone-stage {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      padding-top: 10px;
+    }
+
+    .phone-caption {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 1px solid #333;
+      background: rgba(10, 10, 10, 0.85);
+      color: #cfcfcf;
+      font-size: 11.5px;
+      font-weight: 600;
+      z-index: 6;
+    }
+
+    .rec-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff4b4b;
+      animation: recBlink 1.4s infinite;
+    }
+
+    @keyframes recBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    .phone-frame {
+      width: 300px;
+      height: 600px;
+      margin-top: 46px;
+      background: #111111;
+      border: 1px solid #2c2c2c;
+      border-radius: 44px;
+      padding: 12px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 45px 90px -20px rgba(0, 0, 0, 0.55);
+      animation: phoneFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes phoneFloat {
+      0%, 100% { transform: translateY(0) rotate(-0.4deg); }
+      50% { transform: translateY(-14px) rotate(0.4deg); }
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 22px;
+      background: #111111;
+      border-radius: 0 0 16px 16px;
+      z-index: 3;
+    }
+
+    .phone-screen {
+      background: radial-gradient(circle at 50% 0%, #1a1712 0%, #0c0b09 62%);
+      width: 100%;
+      height: 100%;
+      border-radius: 34px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      color: #f4f2ee;
+    }
+
+    .phone-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 15px 20px 4px;
+      color: #f4f2ee;
+    }
+
+    .face-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 16px;
+    }
+
+    .face-header-id {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .face-header-id h4 {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #f4f2ee;
+    }
+
+    .face-header-id p {
+      font-size: 10.5px;
+      color: #8fd6ac;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #57dc8d;
+      box-shadow: 0 0 10px rgba(87, 220, 141, 0.7);
+      animation: statusBlink 2.2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* -------- assistant face -------- */
+    .avatar-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px 6px;
+    }
+
+    .assistant-face-wrap {
+      position: relative;
+      width: 112px;
+      height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .face-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 106, 0, 0.3);
+      opacity: 0;
+      transform: scale(0.85);
+    }
+
+    .avatar-stage.speaking .face-ring {
+      animation: orbRing 1.9s ease-out infinite;
+    }
+
+    .face-ring:nth-child(2) { animation-delay: 0.6s !important; }
+
+    @keyframes orbRing {
+      0% { opacity: 0.55; transform: scale(0.82); }
+      100% { opacity: 0; transform: scale(1.35); }
+    }
+
+    .assistant-face {
+      position: relative;
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 28%, var(--orange-light), var(--orange) 62%, #a33e00 100%);
+      box-shadow: 0 0 0 1px rgba(255, 138, 61, 0.4), 0 12px 30px rgba(255, 106, 0, 0.22);
+      transition: transform 0.4s ease;
+    }
+
+    .avatar-stage.listening .assistant-face {
+      transform: scale(0.96);
+    }
+
+    .avatar-stage.speaking .assistant-face {
+      animation: faceBreathe 2.4s ease-in-out infinite;
+    }
+
+    @keyframes faceBreathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+    }
+
+    .face-eyes {
+      position: absolute;
+      top: 34px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 17px;
+    }
+
+    .face-eye {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #1a0900;
+      animation: faceBlink 4.4s ease-in-out infinite;
+    }
+
+    .face-eye.right { animation-delay: 0.08s; }
+
+    @keyframes faceBlink {
+      0%, 92%, 100% { transform: scaleY(1); }
+      95% { transform: scaleY(0.12); }
+    }
+
+    .face-mouth {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 4px;
+      border-radius: 0 0 14px 14px;
+      background: #1a0900;
+      transition: height 0.2s ease, border-radius 0.2s ease;
+    }
+
+    .avatar-stage.listening .face-mouth {
+      width: 22px;
+      height: 8px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .avatar-stage.speaking .face-mouth {
+      border-radius: 40%;
+      animation: mouthTalk 0.5s ease-in-out infinite;
+    }
+
+    @keyframes mouthTalk {
+      0%, 100% { height: 5px; width: 20px; }
+      50% { height: 14px; width: 24px; }
+    }
+
+    .voice-state {
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9a9690;
+      letter-spacing: 0.02em;
+      transition: color 0.3s ease;
+    }
+
+    .avatar-stage.speaking .voice-state { color: var(--orange-light); }
+    .avatar-stage.listening .voice-state { color: #7fd39f; }
+
+    /* -------- waveform -------- */
+    .waveform {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 18px;
+      margin-top: 8px;
+    }
+
+    .waveform .bar {
+      width: 3px;
+      border-radius: 3px;
+      background: #4c473e;
+      height: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .avatar-stage.speaking .waveform .bar {
+      background: var(--orange);
+      animation: waveTalk 0.9s ease-in-out infinite;
+    }
+
+    .avatar-stage.listening .waveform .bar {
+      background: #57dc8d;
+      animation: waveListen 1.6s ease-in-out infinite;
+    }
+
+    .waveform .bar:nth-child(1) { animation-delay: 0s; }
+    .waveform .bar:nth-child(2) { animation-delay: 0.12s; }
+    .waveform .bar:nth-child(3) { animation-delay: 0.24s; }
+    .waveform .bar:nth-child(4) { animation-delay: 0.36s; }
+    .waveform .bar:nth-child(5) { animation-delay: 0.48s; }
+    .waveform .bar:nth-child(6) { animation-delay: 0.36s; }
+    .waveform .bar:nth-child(7) { animation-delay: 0.24s; }
+
+    @keyframes waveTalk {
+      0%, 100% { height: 5px; }
+      50% { height: 18px; }
+    }
+
+    @keyframes waveListen {
+      0%, 100% { height: 4px; }
+      50% { height: 9px; }
+    }
+
+    /* -------- live captions -------- */
+    .caption-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 6px 22px 10px;
+      text-align: center;
+    }
+
+    .caption-role {
+      font-size: 10.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      opacity: 0;
+      transform: translateY(6px);
+      color: #9a9690;
+    }
+
+    .caption-role.ai { color: var(--orange-light); }
+    .caption-role.customer { color: #8fd6ac; }
+
+    .caption-role.show,
+    .caption-text.show {
+      animation: capFade 0.4s ease forwards;
+    }
+
+    @keyframes capFade {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .caption-text {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #f0eee9;
+      opacity: 0;
+      transform: translateY(6px);
+      max-width: 240px;
+    }
+
+    /* -------- pitch tags -------- */
+    .pitch-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 18px 4px;
+      min-height: 26px;
+    }
+
+    .pitch-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: #1a0900;
+      background: var(--orange-light);
+      padding: 5px 10px;
+      border-radius: 20px;
+      opacity: 0;
+      transform: translateY(6px) scale(0.94);
+    }
+
+    .pitch-tag.show {
+      animation: capFade 0.35s ease forwards;
+    }
+
+    /* -------- footer line -------- */
+    .face-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px 16px 18px;
+      font-size: 10.5px;
+      color: #7d7871;
+    }
+
+    /* floating assistant "popup" card, evokes a notification/popup from the assistant */
+    .assistant-popup {
+      position: absolute;
+      right: -34px;
+      top: 96px;
+      width: 210px;
+      padding: 15px 16px;
+      background: rgba(8, 8, 8, 0.92);
+      border: 1px solid #3a3a3a;
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      z-index: 5;
+      opacity: 0;
+      transform: translateY(10px) scale(0.96);
+    }
+
+    .assistant-popup.show {
+      animation: popupIn 0.55s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+    }
+
+    @keyframes popupIn {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .assistant-popup .popup-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .assistant-popup .popup-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--orange-dark);
+      border: 1px solid var(--orange);
+      color: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .assistant-popup .popup-head strong {
+      font-size: 11.5px;
+      color: #f2f2f2;
+    }
+
+    .assistant-popup p {
+      font-size: 11.5px;
+      color: #cfcfcf;
+      line-height: 1.5;
+    }
+
+    .float-card {
+      position: absolute;
+      background: rgba(8, 8, 8, 0.9);
+      border: 1px solid #333;
+      border-radius: 13px;
+      padding: 12px 15px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #f0f0f0;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+      z-index: 4;
+      backdrop-filter: blur(12px);
+    }
+
+    .float-card small {
+      display: block;
+      color: #7c7c7c;
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .float-card.f1 {
+      left: -46px;
+      bottom: 90px;
+      animation: floatA 5s ease-in-out infinite;
+    }
+
+    @keyframes floatA {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ===============================
+       STATS
+    =============================== */
+
+    .stats-section {
+      padding: 0 0 92px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #0a0a0a;
+    }
+
+    .stat {
+      padding: 28px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+      border-right: 0;
+    }
+
+    .stat-number {
+      color: var(--orange);
+      font-size: 32px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #898989;
+      font-size: 12px;
+    }
+
+    /* ===============================
+       BUSINESS ASSISTANT SECTION
+    =============================== */
+
+    .assistant-section {
+      background:
+        radial-gradient(circle at 12% 40%, rgba(255, 106, 0, 0.08), transparent 28%),
+        var(--surface);
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .assistant-section-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .assistant-intro {
+      max-width: 520px;
+      margin-bottom: 28px;
+      color: #a7a7a7;
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 14px;
+      border: 1px solid #1e3b29;
+      border-radius: 999px;
+      background: #0f1712;
+      color: #74dc9d;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .availability-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 11px rgba(87, 220, 141, 0.8);
+      animation: statusPulse 2s infinite;
+    }
+
+    .assistant-capability-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .assistant-capability-card {
+      display: flex;
+      gap: 16px;
+      padding: 24px;
+      border: 1px solid #252525;
+      border-radius: 16px;
+      background: #0d0d0d;
+      transition: 0.3s ease;
+    }
+
+    .assistant-capability-card:hover {
+      transform: translateY(-5px);
+      border-color: #67300c;
+      background: #111111;
+    }
+
+    .assistant-capability-icon {
+      width: 45px;
+      min-width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #44200a;
+      border-radius: 11px;
+      background: #251003;
+      color: var(--orange);
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .assistant-capability-card h3 {
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .assistant-capability-card p {
+      color: #888;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ===============================
+       HOW IT WORKS / INFOGRAPHIC
+    =============================== */
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 185px;
+      padding: 23px 20px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+      transition: 0.3s ease;
+    }
+
+    .flow-step:hover {
+      transform: translateY(-5px);
+      border-color: var(--orange);
+    }
+
+    .flow-number {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: #251003;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .flow-step h3 {
+      margin-bottom: 7px;
+      font-size: 15px;
+    }
+
+    .flow-step p {
+      color: #888;
+      font-size: 12px;
+    }
+
+    .flow-arrow {
+      position: absolute;
+      top: 45%;
+      right: -14px;
+      z-index: 3;
+      color: var(--orange);
+      font-size: 22px;
+    }
+
+    /* ===============================
+       HOW CUSTOMERS MAY USE IT
+    =============================== */
+
+    .customer-use {
+      background: #090909;
+    }
+
+    .customer-use-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 58px;
+      align-items: center;
+    }
+
+    .customer-photo-wrap {
+      position: relative;
+    }
+
+    .customer-photo {
+      height: 540px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid #2a2a2a;
+      filter: brightness(0.78);
+    }
+
+    .photo-note {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      padding: 15px 17px;
+      border: 1px solid #343434;
+      border-radius: 12px;
+      background: rgba(5, 5, 5, 0.82);
+      backdrop-filter: blur(12px);
+      color: #c8c8c8;
+      font-size: 13px;
+    }
+
+    .question-stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .question-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 17px;
+      border: 1px solid #252525;
+      border-radius: 14px;
+      background: #0f0f0f;
+      transition: 0.25s ease;
+    }
+
+    .question-item:hover {
+      transform: translateX(5px);
+      border-color: #4a2a16;
+    }
+
+    .question-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      background: #251003;
+      color: var(--orange);
+      font-weight: 900;
+    }
+
+    .question-item h3 {
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+
+    .question-item p {
+      color: #878787;
+      font-size: 12px;
+    }
+
+    /* ===============================
+       CAPABILITIES
+    =============================== */
+
+    .capabilities {
+      background: #050505;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .cap-card {
+      padding: 28px;
+      border: 1px solid #242424;
+      border-radius: 17px;
+      background: #0d0d0d;
+      transition: 0.3s ease;
+    }
+
+    .cap-card:hover {
+      transform: translateY(-5px);
+      border-color: #63300e;
+    }
+
+    .cap-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      background: #251003;
+      color: var(--orange);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .cap-card h3 {
+      font-size: 18px;
+      margin-bottom: 9px;
+    }
+
+    .cap-card p {
+      color: #8c8c8c;
+      font-size: 13px;
+    }
+
+    /* ===============================
+       PHOTO USE CASES
+    =============================== */
+
+    .usecases {
+      background: #090909;
+    }
+
+    .usecase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .usecase-card {
+      overflow: hidden;
+      border: 1px solid #252525;
+      border-radius: 18px;
+      background: #0d0d0d;
+      transition: 0.3s ease;
+    }
+
+    .usecase-card:hover {
+      transform: translateY(-7px);
+      border-color: #5a3014;
+    }
+
+    .usecase-img {
+      height: 235px;
+      object-fit: cover;
+      filter: brightness(0.68);
+      transition: 0.45s ease;
+    }
+
+    .usecase-card:hover .usecase-img {
+      transform: scale(1.035);
+      filter: brightness(0.82);
+    }
+
+    .usecase-content {
+      padding: 24px;
+    }
+
+    .usecase-tag {
+      margin-bottom: 8px;
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .usecase-content h3 {
+      margin-bottom: 9px;
+      font-size: 18px;
+    }
+
+    .usecase-content p {
+      color: #8d8d8d;
+      font-size: 13px;
+    }
+
+    /* ===============================
+       BENEFITS / BUSINESS IMPACT
+    =============================== */
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .benefit-card {
+      min-height: 195px;
+      padding: 26px;
+      border: 1px solid #252525;
+      border-radius: 16px;
+      background: #0d0d0d;
+      transition: 0.3s ease;
+    }
+
+    .benefit-card:hover {
+      border-color: #5c3013;
+      transform: translateY(-4px);
+    }
+
+    .benefit-card .big {
+      color: var(--orange);
+      font-size: 27px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .benefit-card h3 {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .benefit-card p {
+      color: #8b8b8b;
+      font-size: 13px;
+    }
+
+    /* ===============================
+       LEAD INTELLIGENCE
+    =============================== */
+
+    .lead-section {
+      background: #090909;
+    }
+
+    .lead-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .future-tag {
+      display: inline-flex;
+      padding: 6px 9px;
+      border: 1px solid #43200a;
+      border-radius: 6px;
+      background: #241004;
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .lead-dashboard {
+      padding: 25px;
+      border: 1px solid #282828;
+      border-radius: 20px;
+      background: #0f0f0f;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    .lead-dashboard-header {
+      margin-bottom: 18px;
+    }
+
+    .lead-dashboard-header small {
+      display: block;
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .lead-dashboard-header h3 {
+      margin-top: 5px;
+      font-size: 18px;
+    }
+
+    .lead-row {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr 0.6fr;
+      gap: 10px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #232323;
+      font-size: 12px;
+    }
+
+    .lead-row:last-child {
+      border-bottom: 0;
+    }
+
+    .lead-row span.sub {
+      color: #727272;
+    }
+
+    .intent {
+      padding: 5px 8px;
+      text-align: center;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .intent.high {
+      background: rgba(87, 220, 141, 0.1);
+      color: var(--green);
+    }
+
+    .intent.medium {
+      background: rgba(255, 174, 0, 0.1);
+      color: #ffae00;
+    }
+
+    .intent.info {
+      background: rgba(115, 168, 255, 0.1);
+      color: var(--blue);
+    }
+
+    .score {
+      text-align: right;
+      color: var(--orange);
+      font-weight: 900;
+    }
+
+    .dashboard-note {
+      margin-top: 14px;
+      color: #636363;
+      font-size: 10px;
+    }
+
+    /* ===============================
+       ROADMAP
+    =============================== */
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .roadmap-card {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border: 1px solid #252525;
+      border-radius: 18px;
+      background: #0d0d0d;
+    }
+
+    .roadmap-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--orange);
+    }
+
+    .roadmap-stage {
+      color: var(--orange);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 13px;
+    }
+
+    .roadmap-card h3 {
+      margin-bottom: 11px;
+      font-size: 18px;
+    }
+
+    .roadmap-card p {
+      margin-bottom: 17px;
+      color: #888;
+      font-size: 13px;
+    }
+
+    .roadmap-card ul {
+      list-style: none;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .roadmap-card li {
+      margin: 7px 0;
+    }
+
+    .roadmap-card li::before {
+      content: "✓";
+      color: var(--orange);
+      margin-right: 8px;
+    }
+
+    /* ===============================
+       CTA
+    =============================== */
+
+    .cta {
+      text-align: center;
+    }
+
+    .cta-box {
+      padding: 78px 34px;
+      border: 1px solid #372215;
+      border-radius: 25px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 106, 0, 0.18), transparent 42%),
+        #0d0d0d;
+    }
+
+    .cta-box h2 {
+      max-width: 860px;
+      margin: 0 auto 18px;
+      font-size: clamp(34px, 4.5vw, 46px);
+      line-height: 1.14;
+    }
+
+    .cta-box p {
+      max-width: 700px;
+      margin: 0 auto 28px;
+      color: #999;
+    }
+
+    .disclaimer {
+      margin-top: 24px;
+      color: #676767;
+      font-size: 10px;
+    }
+
+    /* ===============================
+       FOOTER
+    =============================== */
+
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid #1e1e1e;
+      color: #696969;
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    /* ===============================
+       ANIMATIONS
+    =============================== */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    /* ===============================
+       RESPONSIVE
+    =============================== */
+
+    @media (max-width: 1000px) {
+      .hero-grid,
+      .assistant-section-grid,
+      .customer-use-grid,
+      .lead-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat:nth-child(2) {
+        border-right: 0;
+      }
+
+      .stat:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .flow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .flow-arrow {
+        display: none;
+      }
+
+      .capability-grid,
+      .usecase-grid,
+      .benefit-grid,
+      .roadmap {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .assistant-popup {
+        right: 10px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      section {
+        padding: 78px 0;
+      }
+
+      .test-bar {
+        font-size: 9px;
+      }
+
+      .nav-inner {
+        height: 68px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .customer-photo {
+        height: 420px;
+      }
+
+      .assistant-popup,
+      .float-card {
+        display: none;
+      }
+
+      .phone-frame {
+        width: 270px;
+        height: 550px;
+      }
+
+      .stats,
+      .assistant-capability-grid,
+      .flow,
+      .capability-grid,
+      .usecase-grid,
+      .benefit-grid,
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat:last-child {
+        border-bottom: 0;
+      }
+
+      .lead-row {
+        grid-template-columns: 1fr;
+      }
+
+      .score {
+        text-align: left;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  
+
+    /* ===============================
+       LIGHT THEME OVERRIDES
+    =============================== */
+
+    :root {
+      --black: #f7f6f2;
+      --surface: #f1efe9;
+      --card: #ffffff;
+      --card-2: #faf9f6;
+      --border: #dedbd4;
+      --muted: #6f6b64;
+      --muted-2: #4f4c47;
+      --white: #171717;
+    }
+
+    body {
+      background: #f7f6f2;
+      color: #171717;
+    }
+
+    nav {
+      background: rgba(247, 246, 242, 0.92);
+      border-bottom: 1px solid #dedbd4;
+    }
+
+    .nav-links {
+      color: #6f6b64;
+    }
+
+    .nav-links a:hover {
+      color: #111111;
+    }
+
+    .nav-cta {
+      background: #fff7f0;
+    }
+
+    .hero::before {
+      background: rgba(255, 106, 0, 0.10);
+    }
+
+    .hero-copy,
+    .assistant-intro,
+    .section-description {
+      color: #6f6b64;
+    }
+
+    .hero-points {
+      color: #66615b;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      border-color: #d7d3cc;
+      color: #242424;
+    }
+
+    .btn-secondary:hover {
+      border-color: #a7a199;
+    }
+
+    .customer-photo {
+      border-color: #d8d4cd;
+    }
+
+    .photo-note {
+      background: rgba(255, 255, 255, 0.86);
+      border-color: rgba(210, 205, 197, 0.95);
+      color: #35312d;
+    }
+
+    .stats {
+      background: #ffffff;
+      border-color: #dedbd4;
+      box-shadow: 0 12px 32px rgba(56, 44, 30, 0.05);
+    }
+
+    .stat {
+      border-color: #e4e1db;
+    }
+
+    .stat-label {
+      color: #716d66;
+    }
+
+    .assistant-section,
+    .customer-use,
+    .usecases,
+    .lead-section {
+      background:
+        radial-gradient(circle at 12% 40%, rgba(255, 106, 0, 0.07), transparent 28%),
+        #f1efe9;
+      border-color: #dedbd4;
+    }
+
+    .assistant-capability-card,
+    .flow-step,
+    .question-item,
+    .cap-card,
+    .usecase-card,
+    .benefit-card,
+    .lead-dashboard,
+    .roadmap-card {
+      background: #ffffff;
+      border-color: #dedbd4;
+      box-shadow: 0 10px 28px rgba(59, 47, 35, 0.045);
+    }
+
+    .assistant-capability-card:hover,
+    .flow-step:hover,
+    .question-item:hover,
+    .cap-card:hover,
+    .usecase-card:hover,
+    .benefit-card:hover {
+      background: #fffaf6;
+      border-color: #ff9a52;
+    }
+
+    .assistant-capability-card p,
+    .flow-step p,
+    .question-item p,
+    .cap-card p,
+    .usecase-content p,
+    .benefit-card p,
+    .roadmap-card p,
+    .roadmap-card ul {
+      color: #6f6b64;
+    }
+
+    .availability {
+      background: #effaf3;
+      border-color: #b9e1c6;
+      color: #2f8a52;
+    }
+
+    .lead-row {
+      border-color: #e2dfd8;
+    }
+
+    .lead-row span.sub {
+      color: #7e7971;
+    }
+
+    .dashboard-note,
+    .disclaimer {
+      color: #8b867f;
+    }
+
+    .cta-box {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 106, 0, 0.14), transparent 45%),
+        #ffffff;
+      border-color: #ead7c8;
+      box-shadow: 0 18px 45px rgba(70, 52, 35, 0.06);
+    }
+
+    .cta-box p {
+      color: #6f6b64;
+    }
+
+    footer {
+      border-top-color: #dedbd4;
+      color: #7d7870;
+    }
+
+    @media (max-width: 1000px) {
+      .stat:nth-child(-n + 2) {
+        border-bottom-color: #e4e1db;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .stat {
+        border-bottom-color: #e4e1db;
+      }
+    }
+
+  
+    .test-pill {
+      font-size: 8px;
+      padding: 3px 7px;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .hero-actions .btn-secondary {
+      min-width: 150px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- TEST WEBSITE DISCLAIMER -->
+  <div class="test-bar">
+    TEST WEBSITE — AI Digital Twin concept for client testing.
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container nav-inner">
+      <div class="logo">Digital Twin <span>AI Assistant</span> <span class="test-pill">(TEST WEBSITE)</span></div>
+
+      <div class="nav-links">
+        <a href="#assistant">AI Assistant</a>
+        <a href="#how">How It Works</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#usecases">Use Cases</a>
+        <a href="#future">Vision</a>
+      </div>
+</div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">✦ AI ENABLEMENT FOR BUSINESS</div>
+
+        <h1>
+          Give Your Business
+          <span class="orange">an AI Digital Twin.</span>
+        </h1>
+
+        <p class="hero-copy">
+          Imagine an AI Assistant that understands your business, explains your
+          products and services, answers customer FAQs, supports sales
+          conversations and helps identify potential opportunities — even when
+          your team isn't online.
+        </p>
+
+        <div class="hero-actions">
+<a href="#how" class="btn-secondary">See How It Works</a>
+        </div>
+
+        <div class="hero-points">
+          <span>Available 24×7</span>
+          <span>Trained on Your Business</span>
+          <span>Sales + Support</span>
+          <span>Lead Intelligence</span>
+        </div>
+      </div>
+
+      <!-- ANIMATED PHONE MOCKUP — replaces the static hero photo -->
+      <div class="hero-visual reveal">
+        <div class="phone-stage">
+          <div class="phone-caption"><span class="rec-dot"></span> Simulated preview</div>
+
+          <div class="float-card f1">
+            Response time
+            <small>under 2 seconds</small>
+          </div>
+
+          <div class="assistant-popup" id="assistantPopup">
+            <div class="popup-head">
+              <div class="popup-icon">✦</div>
+              <strong>New opportunity</strong>
+            </div>
+            <p>A visitor just asked about pricing — intent looks high.</p>
+          </div>
+
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+
+              <div class="phone-status">
+                <span>9:41</span>
+                <span>●●● 5G 🔋</span>
+              </div>
+
+              <div class="call-header">
+                <div class="call-header-id">
+                  <div class="live-badge"><span class="live-dot"></span>Live</div>
+                  <h4>Your AI Assistant</h4>
+                </div>
+                <div class="call-timer" id="callTimer">00:00</div>
+              </div>
+
+              <div class="avatar-stage" id="avatarStage">
+                <div class="avatar-orb-wrap">
+                  <div class="avatar-ring"></div>
+                  <div class="avatar-ring"></div>
+                  <div class="avatar-ring"></div>
+                  <div class="avatar-orb">✦</div>
+                </div>
+                <div class="voice-state" id="voiceState">Listening</div>
+                <div class="waveform">
+                  <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                  <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                </div>
+              </div>
+
+              <div class="caption-stage">
+                <div class="caption-role" id="captionRole">Customer</div>
+                <div class="caption-text" id="captionText"></div>
+              </div>
+
+              <div class="pitch-tags" id="pitchTags"></div>
+
+              <div class="call-controls">
+                <div class="call-btn mic active" id="micBtn">🎙</div>
+                <div class="call-btn">🔊</div>
+                <div class="call-btn end">📞</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats reveal">
+        <div class="stat">
+          <div class="stat-number" data-target="24">0</div>
+          <div class="stat-label">Hours Available Every Day</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number" data-target="7">0</div>
+          <div class="stat-label">Days a Week</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number" data-target="4">0</div>
+          <div class="stat-label">Core Business Roles</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-number" data-target="1">0</div>
+          <div class="stat-label">Intelligent Business Assistant</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUR AI BUSINESS ASSISTANT -->
+  <section class="assistant-section" id="assistant">
+    <div class="container assistant-section-grid">
+      <div class="reveal">
+        <div class="section-tag">Your Digital Twin</div>
+
+        <h2 class="section-title">
+          Your AI <span class="orange">Business Assistant.</span>
+        </h2>
+
+        <p class="assistant-intro">
+          Think of it as a digital extension of your business — available to help
+          customers understand what you offer, answer common questions and guide
+          them towards the right product, service or team.
+        </p>
+
+        <div class="availability">
+          <span class="availability-dot"></span>
+          Always available
+        </div>
+      </div>
+
+      <div class="assistant-capability-grid">
+        <div class="assistant-capability-card reveal">
+          <div class="assistant-capability-icon">✦</div>
+          <div>
+            <h3>Product & Service Information</h3>
+            <p>
+              Help customers quickly understand your products, services,
+              features and business capabilities.
+            </p>
+          </div>
+        </div>
+
+        <div class="assistant-capability-card reveal">
+          <div class="assistant-capability-icon">?</div>
+          <div>
+            <h3>FAQs & Customer Support</h3>
+            <p>
+              Respond to common customer questions using your approved business
+              information and knowledge.
+            </p>
+          </div>
+        </div>
+
+        <div class="assistant-capability-card reveal">
+          <div class="assistant-capability-icon">↗</div>
+          <div>
+            <h3>Sales Conversations</h3>
+            <p>
+              Help potential customers understand which product or service may
+              be most relevant to their requirement.
+            </p>
+          </div>
+        </div>
+
+        <div class="assistant-capability-card reveal">
+          <div class="assistant-capability-icon">◎</div>
+          <div>
+            <h3>Opportunity Identification</h3>
+            <p>
+              Use customer conversations to better understand interest, intent
+              and potential sales opportunities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">How It Works</div>
+
+        <h2 class="section-title">
+          From a Website Visit to
+          <span class="orange">a Meaningful Conversation.</span>
+        </h2>
+
+        <p class="section-description">
+          Instead of expecting visitors to search through multiple pages, an AI
+          Digital Twin can help them understand your business through a natural,
+          guided interaction.
+        </p>
+      </div>
+
+      <div class="flow reveal">
+        <div class="flow-step">
+          <div class="flow-number">01</div>
+          <h3>Customer Visits</h3>
+          <p>A potential customer arrives on your website.</p>
+          <div class="flow-arrow">→</div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-number">02</div>
+          <h3>Customer Asks</h3>
+          <p>They ask about services, pricing, FAQs or capabilities.</p>
+          <div class="flow-arrow">→</div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-number">03</div>
+          <h3>AI Understands</h3>
+          <p>The Digital Twin identifies what the customer is looking for.</p>
+          <div class="flow-arrow">→</div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-number">04</div>
+          <h3>AI Guides</h3>
+          <p>Relevant products, services and answers are presented.</p>
+          <div class="flow-arrow">→</div>
+        </div>
+
+        <div class="flow-step">
+          <div class="flow-number">05</div>
+          <h3>Opportunity</h3>
+          <p>Interested customers can be identified and routed to your team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW CUSTOMERS MAY USE THE AI -->
+  <section class="customer-use">
+    <div class="container customer-use-grid">
+      <div class="customer-photo-wrap reveal">
+        <img
+          class="customer-photo"
+          src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85"
+          alt="Business customer discussing services"
+        />
+
+        <div class="photo-note">
+          A potential customer can ask about your services, FAQs, pricing,
+          implementation or next steps without searching through the entire website.
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="section-tag">Customer Experience</div>
+
+        <h2 class="section-title">
+          Help Customers Find
+          <span class="orange">the Right Answer Faster.</span>
+        </h2>
+
+        <p class="section-description" style="margin-bottom:24px;">
+          This test section shows the types of questions your future AI
+          Business Assistant could help with. There is no live chatbot integrated
+          on this test website.
+        </p>
+
+        <div class="question-stack">
+          <div class="question-item">
+            <div class="question-icon">01</div>
+            <div>
+              <h3>“What services does your company provide?”</h3>
+              <p>
+                Explain your service portfolio in a simple, customer-friendly way.
+              </p>
+            </div>
+          </div>
+
+          <div class="question-item">
+            <div class="question-icon">02</div>
+            <div>
+              <h3>“Which solution is right for our business?”</h3>
+              <p>
+                Guide visitors towards relevant products or solutions based on
+                their requirement.
+              </p>
+            </div>
+          </div>
+
+          <div class="question-item">
+            <div class="question-icon">03</div>
+            <div>
+              <h3>“How does pricing or implementation work?”</h3>
+              <p>
+                Answer approved FAQs around pricing models, onboarding and
+                implementation.
+              </p>
+            </div>
+          </div>
+
+          <div class="question-item">
+            <div class="question-icon">04</div>
+            <div>
+              <h3>“Can I speak with your sales team?”</h3>
+              <p>
+                Help move high-interest customers towards the right team or next step.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="capabilities" id="capabilities">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">AI Capabilities</div>
+
+        <h2 class="section-title">
+          One Assistant.
+          <span class="orange">Multiple Business Functions.</span>
+        </h2>
+
+        <p class="section-description">
+          The objective is not simply to create another chatbot. The Digital Twin
+          can become an intelligent engagement layer between your business and
+          your customers.
+        </p>
+      </div>
+
+      <div class="capability-grid">
+        <div class="cap-card reveal">
+          <div class="cap-icon">?</div>
+          <h3>FAQ Assistant</h3>
+          <p>
+            Answer common questions around services, products, policies and
+            company information.
+          </p>
+        </div>
+
+        <div class="cap-card reveal">
+          <div class="cap-icon">✦</div>
+          <h3>Product & Service Discovery</h3>
+          <p>
+            Help visitors understand what the company offers without navigating
+            through multiple pages.
+          </p>
+        </div>
+
+        <div class="cap-card reveal">
+          <div class="cap-icon">↗</div>
+          <h3>Sales Pitching</h3>
+          <p>
+            Explain relevant products and services based on the requirements
+            shared by the customer.
+          </p>
+        </div>
+
+        <div class="cap-card reveal">
+          <div class="cap-icon">◎</div>
+          <h3>Lead Qualification</h3>
+          <p>
+            Understand customer intent and help identify stronger potential
+            opportunities.
+          </p>
+        </div>
+
+        <div class="cap-card reveal">
+          <div class="cap-icon">↔</div>
+          <h3>Human Handoff</h3>
+          <p>
+            Route conversations requiring human expertise to the relevant sales,
+            support or business team.
+          </p>
+        </div>
+
+        <div class="cap-card reveal">
+          <div class="cap-icon">◷</div>
+          <h3>Always Available</h3>
+          <p>
+            Give customers access to approved business information beyond normal
+            business hours.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES WITH PHOTOS -->
+  <section class="usecases" id="usecases">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">Business Use Cases</div>
+
+        <h2 class="section-title">
+          Designed for More Than
+          <span class="orange">Customer Support.</span>
+        </h2>
+
+        <p class="section-description">
+          The same AI layer can support different business teams depending on the
+          information and workflows it is connected to.
+        </p>
+      </div>
+
+      <div class="usecase-grid">
+        <div class="usecase-card reveal">
+          <img
+            class="usecase-img"
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1000&q=80"
+            alt="Sales meeting"
+          />
+          <div class="usecase-content">
+            <div class="usecase-tag">SALES</div>
+            <h3>AI Sales Assistant</h3>
+            <p>
+              Support product discovery, explain offerings, answer initial
+              questions and help identify potential buyers.
+            </p>
+          </div>
+        </div>
+
+        <div class="usecase-card reveal">
+          <img
+            class="usecase-img"
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80"
+            alt="Customer support team"
+          />
+          <div class="usecase-content">
+            <div class="usecase-tag">CUSTOMER EXPERIENCE</div>
+            <h3>AI Customer Assistant</h3>
+            <p>
+              Respond to repetitive FAQs and help customers access relevant
+              company information faster.
+            </p>
+          </div>
+        </div>
+
+        <div class="usecase-card reveal">
+          <img
+            class="usecase-img"
+            src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80"
+            alt="Modern business office"
+          />
+          <div class="usecase-content">
+            <div class="usecase-tag">BUSINESS ENABLEMENT</div>
+            <h3>Knowledge Assistant</h3>
+            <p>
+              Make approved company knowledge easier for customers, employees or
+              partners to discover and use.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS IMPACT -->
+  <section>
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">Business Impact</div>
+
+        <h2 class="section-title">
+          Why Businesses Are Exploring
+          <span class="orange">AI Assistants.</span>
+        </h2>
+
+        <p class="section-description">
+          The value is not only answering questions. It is creating a smarter,
+          more responsive first layer of customer interaction.
+        </p>
+      </div>
+
+      <div class="benefit-grid">
+        <div class="benefit-card reveal">
+          <div class="big">24×7</div>
+          <h3>Customer Availability</h3>
+          <p>
+            Customers can access useful business information even outside normal
+            working hours.
+          </p>
+        </div>
+
+        <div class="benefit-card reveal">
+          <div class="big">↗</div>
+          <h3>Higher Engagement</h3>
+          <p>
+            Turn passive browsing into guided interactions around products,
+            services and needs.
+          </p>
+        </div>
+
+        <div class="benefit-card reveal">
+          <div class="big">◎</div>
+          <h3>Better Lead Context</h3>
+          <p>
+            Understand what a potential customer is looking for before a human
+            sales conversation begins.
+          </p>
+        </div>
+
+        <div class="benefit-card reveal">
+          <div class="big">⚡</div>
+          <h3>Faster Responses</h3>
+          <p>
+            Provide immediate answers to repetitive service, pricing and support
+            questions.
+          </p>
+        </div>
+
+        <div class="benefit-card reveal">
+          <div class="big">✓</div>
+          <h3>Consistent Messaging</h3>
+          <p>
+            Present approved business information and positioning more
+            consistently across customer interactions.
+          </p>
+        </div>
+
+        <div class="benefit-card reveal">
+          <div class="big">↓</div>
+          <h3>Lower Repetitive Work</h3>
+          <p>
+            Reduce repetitive first-level queries so teams can focus on
+            higher-value customer conversations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEAD INTELLIGENCE -->
+  <section class="lead-section">
+    <div class="container lead-grid">
+      <div class="reveal">
+        <div class="future-tag">FUTURE POSSIBILITY</div>
+        <div class="section-tag">Conversation Intelligence</div>
+
+        <h2 class="section-title">
+          Turn Conversations Into
+          <span class="orange">Customer Intelligence.</span>
+        </h2>
+
+        <p class="section-description" style="margin-bottom:22px;">
+          As the solution evolves, customer conversations can help businesses
+          understand which visitors are researching, evaluating or showing
+          stronger buying intent.
+        </p>
+
+        <p style="color:#888;font-size:14px;">
+          Instead of simply receiving anonymous website traffic, teams could
+          receive better context around what the customer asked, which service
+          they were interested in and whether a follow-up may be useful.
+        </p>
+      </div>
+
+      <div class="lead-dashboard reveal">
+        <div class="lead-dashboard-header">
+          <small>SAMPLE LEAD INTELLIGENCE</small>
+          <h3>Conversation Opportunities</h3>
+        </div>
+
+        <div class="lead-row">
+          <div>
+            Enterprise Customer<br />
+            <span class="sub">Asked about implementation & pricing</span>
+          </div>
+          <div class="intent high">HIGH INTENT</div>
+          <div class="score">92%</div>
+        </div>
+
+        <div class="lead-row">
+          <div>
+            Mid-size SaaS Business<br />
+            <span class="sub">Asked about sales integration</span>
+          </div>
+          <div class="intent high">HIGH INTENT</div>
+          <div class="score">84%</div>
+        </div>
+
+        <div class="lead-row">
+          <div>
+            Website Visitor<br />
+            <span class="sub">Exploring service capabilities</span>
+          </div>
+          <div class="intent medium">EXPLORING</div>
+          <div class="score">61%</div>
+        </div>
+
+        <div class="lead-row">
+          <div>
+            New Visitor<br />
+            <span class="sub">Asked general FAQs</span>
+          </div>
+          <div class="intent info">INFORMATION</div>
+          <div class="score">38%</div>
+        </div>
+
+        <div class="dashboard-note">
+          Test dashboard only — not live customer data.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURE ROADMAP -->
+  <section id="future">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-tag">Long-term Vision</div>
+
+        <h2 class="section-title">
+          From Website Assistant to
+          <span class="orange">AI Customer Engagement.</span>
+        </h2>
+
+        <p class="section-description">
+          A Digital Twin can evolve progressively instead of requiring businesses
+          to change their entire customer experience at once.
+        </p>
+      </div>
+
+      <div class="roadmap">
+        <div class="roadmap-card reveal">
+          <div class="roadmap-stage">STAGE 01 — WEBSITE</div>
+          <h3>AI Website Assistant</h3>
+          <p>
+            An intelligent business assistant available through your website.
+          </p>
+          <ul>
+            <li>Business FAQs</li>
+            <li>Service information</li>
+            <li>Product discovery</li>
+            <li>Customer guidance</li>
+          </ul>
+        </div>
+
+        <div class="roadmap-card reveal">
+          <div class="roadmap-stage">STAGE 02 — SALES</div>
+          <h3>AI Sales Assistant</h3>
+          <p>
+            Move from answering questions to assisting customer discovery and
+            sales qualification.
+          </p>
+          <ul>
+            <li>Requirement discovery</li>
+            <li>Personalised pitching</li>
+            <li>Lead qualification</li>
+            <li>Conversation summaries</li>
+          </ul>
+        </div>
+
+        <div class="roadmap-card reveal">
+          <div class="roadmap-stage">STAGE 03 — VOICE</div>
+          <h3>AI Voice Assistant</h3>
+          <p>
+            Extend the same business intelligence into customer calls and
+            voice-based interaction.
+          </p>
+          <ul>
+            <li>Voice conversations</li>
+            <li>Customer call assistance</li>
+            <li>Opportunity identification</li>
+            <li>Sales / support routing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="experience">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div class="section-tag">Digital Twin AI Assistant (Test Website)</div>
+
+        <h2>
+          What If Your Business Could
+          <span class="orange">Speak to Every Customer?</span>
+        </h2>
+
+        <p>
+          This test website shows how an AI Digital Twin could sit between
+          your business knowledge and your customers — helping answer, guide,
+          pitch and identify opportunities.
+        </p>
+
+        <a href="#assistant" class="btn-primary">Explore the Concept →</a>
+
+        <div class="disclaimer">
+          This is a test website. No live chatbot is integrated
+          on this page. The interactive AI Assistant can be added separately at a
+          later stage.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div>Digital Twin AI Assistant (Test Website)</div>
+      <div>Test Website • AI Digital Twin Experience</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal animation
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    revealElements.forEach((element) => revealObserver.observe(element));
+
+    // Animated counters
+    const counters = document.querySelectorAll(".stat-number");
+    let countersStarted = false;
+
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting || countersStarted) return;
+
+          countersStarted = true;
+
+          counters.forEach((counter) => {
+            const target = Number(counter.dataset.target);
+            let current = 0;
+
+            const duration = 800;
+            const stepTime = Math.max(30, Math.floor(duration / target));
+
+            const timer = setInterval(() => {
+              current += 1;
+              counter.textContent = current;
+
+              if (current >= target) {
+                clearInterval(timer);
+
+                if (target === 24) {
+                  counter.textContent = "24×7";
+                }
+              }
+            }, stepTime);
+          });
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    const stats = document.querySelector(".stats");
+    if (stats) statsObserver.observe(stats);
+
+    // ==============================================================
+    // ANIMATED PHONE DEMO — a live-call style AI assistant, speaking
+    // to a customer the way a human customer care rep would.
+    // ==============================================================
+    const avatarStage = document.getElementById("avatarStage");
+    const voiceState = document.getElementById("voiceState");
+    const captionRole = document.getElementById("captionRole");
+    const captionText = document.getElementById("captionText");
+    const pitchTagsEl = document.getElementById("pitchTags");
+    const assistantPopup = document.getElementById("assistantPopup");
+    const micBtn = document.getElementById("micBtn");
+    const callTimerEl = document.getElementById("callTimer");
+
+    const script = [
+      { role: "customer", text: "Hi, what services does your company provide?" },
+      { role: "ai", text: "We help businesses handle customer questions, sales conversations and support — all through one assistant trained on your business.", tags: ["24/7 availability", "Trained on your business"] },
+      { role: "customer", text: "How does pricing work?" },
+      { role: "ai", text: "Pricing depends on scope and channels. I can put together a quick estimate once I know a bit more about your business.", tags: ["Custom quotes"] },
+      { role: "popup" },
+      { role: "customer", text: "Can I speak with your sales team?" },
+      { role: "ai", text: "Absolutely — I'll connect you with our sales team now, along with everything we've discussed.", tags: ["Instant handoff"] }
+    ];
+
+    function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+
+    async function hideCaption() {
+      captionRole.classList.remove("show");
+      captionText.classList.remove("show");
+      await sleep(250);
+    }
+
+    async function showCaption(role, text) {
+      captionRole.className = "caption-role " + (role === "ai" ? "ai" : "customer");
+      captionRole.textContent = role === "ai" ? "AI Assistant" : "Customer";
+      captionText.textContent = text;
+      requestAnimationFrame(() => {
+        captionRole.classList.add("show");
+        captionText.classList.add("show");
+      });
+      const readTime = Math.max(1800, text.length * 42);
+      await sleep(readTime);
+    }
+
+    async function showPitchTags(tags) {
+      if (!tags || !tags.length) return;
+      pitchTagsEl.innerHTML = "";
+      const els = [];
+      for (const label of tags) {
+        const t = document.createElement("div");
+        t.className = "pitch-tag";
+        t.textContent = label;
+        pitchTagsEl.appendChild(t);
+        els.push(t);
+        requestAnimationFrame(() => t.classList.add("show"));
+        await sleep(160);
+      }
+      await sleep(1500);
+      els.forEach((t) => t.classList.remove("show"));
+      await sleep(300);
+      pitchTagsEl.innerHTML = "";
+    }
+
+    async function showPopup() {
+      assistantPopup.classList.add("show");
+      await sleep(2600);
+      assistantPopup.classList.remove("show");
+      await sleep(300);
+    }
+
+    function setListening() {
+      avatarStage.classList.remove("speaking");
+      avatarStage.classList.add("listening");
+      voiceState.textContent = "Listening";
+      micBtn.classList.add("active");
+    }
+
+    function setSpeaking() {
+      avatarStage.classList.remove("listening");
+      avatarStage.classList.add("speaking");
+      voiceState.textContent = "Speaking";
+      micBtn.classList.remove("active");
+    }
+
+    async function playScript() {
+      for (const step of script) {
+        if (step.role === "customer") {
+          setListening();
+          await showCaption("customer", step.text);
+          await hideCaption();
+        } else if (step.role === "ai") {
+          setSpeaking();
+          await showCaption("ai", step.text);
+          await showPitchTags(step.tags);
+          await hideCaption();
+        } else if (step.role === "popup") {
+          await showPopup();
+        }
+      }
+      setListening();
+      await sleep(1800);
+    }
+
+    async function loopPhone() {
+      // eslint-disable-next-line no-constant-condition
+      while (true) {
+        await playScript();
+      }
+    }
+
+    let callSeconds = 0;
+    function startCallTimer() {
+      setInterval(() => {
+        callSeconds += 1;
+        const m = String(Math.floor(callSeconds / 60)).padStart(2, "0");
+        const s = String(callSeconds % 60).padStart(2, "0");
+        callTimerEl.textContent = m + ":" + s;
+      }, 1000);
+    }
+
+    const phoneStageEl = document.querySelector(".phone-stage");
+    if (phoneStageEl) {
+      const phoneObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setListening();
+              startCallTimer();
+              loopPhone();
+              phoneObserver.disconnect();
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
+      phoneObserver.observe(phoneStageEl);
+    }
+  </script>
+</body>
+</html>
